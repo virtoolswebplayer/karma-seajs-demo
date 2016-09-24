@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/karma start karma.phantomjs.conf.js"
+    "test": "./node_modules/.bin/karma start karma.phantomjs.conf.js",
+    "test:chrome": "./node_modules/.bin/karma start karma.chrome.conf.js"
   },
   "keywords": [],
   "author": "",
