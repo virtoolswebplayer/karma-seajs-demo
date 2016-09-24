@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/karma start karma.phantomjs.conf.js",
-    "test:chrome": "./node_modules/.bin/karma start karma.chrome.conf.js"
+    "test:chrome": "./node_modules/.bin/karma start karma.chrome.conf.js",
+    "test": "./node_modules/.bin/karma start karma.conf.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "karma",
+    "seajs",
+    "coverage"
+  ],
+  "author": "高乐天",
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
