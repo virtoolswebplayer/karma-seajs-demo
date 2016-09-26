@@ -14,7 +14,7 @@ module.exports = function (config) {
       // {pattern: 'vender/**/*.js',included: false,watched: false},
       {pattern: 'src/**/*.js', included: false},  // inclueed: false 不加载到浏览器
       {pattern: 'test/**/*.js', included: false}, // inclueed: false 不加载到浏览器
-      'test/index.js'
+      'test/test-main.js'
     ],
 
 
