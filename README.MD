@@ -1,52 +1,48 @@
-# 搭建karam 单元测试环境
-
-> 注意 为如果你在 root 用户下通过npm install安装依赖包，生成的node_modules 文件夹的所有者为 root,当切换为普通用户时，是无权对node_modules文件夹写入文件的，也就是说普通用户下运行npm install 会报无权写入的错误。所为安装 npm 包的，确保不是root用户。
-
-# 安装
-
-确保安装了nodejs 
+开始
 
 ```bash
-mkdir karma-demo
-cd karma-demo
-
-# 可能需要root用户 需要在npm 前面加 sudo
-# 全局安装 karma-cli，这样我们就可以在任何地方执行 karma命令了
-npm install karma-cli -g 
-
-#快速创建package.json
-npm init -y 
-
-
-npm install karma -D
-
-用es6写单元测试
-
-
+git clone https://github.com/virtoolswebplayer/karma-seajs-demo.git
+npm install
 ```
 
-如果你想用es6写单元测试
+运行单元测试
 
-```
-npm install babel-core babel-preset-es2015  babel-preset-stage-0 -D
-```
+```bash
+npm run test
 
-想在浏览器里正常跑？安装babel运行时插件 babel-plugin-transform-runtime 和 babel-polyfill
+#or 
 
-```
-npm install babel-plugin-transform-runtime babel-ployfill -D
+npm run test:chrome
 ```
 
-安装babel预处理器,参考 [babel官方文档](http://babeljs.io/docs/setup/#karma)
+修改配置
+```js
+# karma.conf.js
 
-```
-npm install --save-dev karma-babel-preprocessor
-```
-在根目录下建.babelrc
-```
-touch .babelrc
+// 配置需要加载到浏览器的js文件
+// {pattern: 'src/**/*.js', included: false} 说明：
+// pattern: 'src/**/*.js' 表示 src目录下的所有js文件，包括其子目录 ，如 src/framework.js  , src/libs/libs.js 都会包含进来
+// included: false 表示符合条件的脚本不会自动以 <script>形式插入，需要手动加载，比如通过 requirejs或seajs进行加载
+
+files: [
+      // {pattern: 'vender/**/*.js',included: false,watched: false},
+      {pattern: 'src/**/*.js', included: false},  // 配置源码目录 inclueed: false 不加载到浏览器
+      {pattern: 'test/**/*.js', included: false}, // 配置测试目录 inclueed: false 不加载到浏览器
+      'test/index.js'
+],
+
+
+// 要排除的目录或文件 规则同上
+exclude: [],
 ```
 
-# 配置
+如果你的源码目录不是 src ,还需修改 
 
+```js
+# test/test-main.js
 
+seajs.config({
+    base: '/base/src', //配置src目录， 注意必须以 /base开头，具体详见 test/test-main.js 源码
+    alias: alias
+});
+```
